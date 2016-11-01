@@ -1,0 +1,15 @@
+import pandas as pd
+
+# Reads plates into individual dataframes and fills empty values using non-null values via "pad" method
+
+plate1 = pd.read_excel('06222016_Staph_Array_Data.xlsx', sheetname='Plate 1', header=1, index_col =0)
+plate1_fill = plate1.fillna(method='pad')
+
+# Converts dataframe to tab-delimited CSV - opens CSV
+
+plate1_fill.to_csv('wb_staph.csv', sep='\t', encoding='utf-8')
+
+with open('wb_staph.csv', 'r') as flat_csv:
+    reader = csv.reader(flat_csv)
+    for row in reader:
+        print(row)
